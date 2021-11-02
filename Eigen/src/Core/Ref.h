@@ -61,10 +61,10 @@ struct traits<RefBase<Derived> > : public traits<Derived> {};
 template<typename Derived> class RefBase
  : public MapBase<Derived>
 {
+public:
   typedef typename internal::traits<Derived>::PlainObjectType PlainObjectType;
   typedef typename internal::traits<Derived>::StrideType StrideType;
 
-public:
 
   typedef MapBase<Derived> Base;
   EIGEN_DENSE_PUBLIC_INTERFACE(RefBase)
@@ -331,8 +331,8 @@ template<typename PlainObjectType, int Options, typename StrideType> class Ref
 template<typename TPlainObjectType, int Options, typename StrideType> class Ref<const TPlainObjectType, Options, StrideType>
   : public RefBase<Ref<const TPlainObjectType, Options, StrideType> >
 {
-    typedef internal::traits<Ref> Traits;
   public:
+    typedef internal::traits<Ref> Traits;
 
     typedef RefBase<Ref> Base;
     EIGEN_DENSE_PUBLIC_INTERFACE(Ref)
