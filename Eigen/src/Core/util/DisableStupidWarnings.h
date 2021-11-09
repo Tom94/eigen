@@ -75,6 +75,40 @@
 #endif
 
 #if defined __NVCC__
+#if defined __NVCC_DIAG_PRAGMA_SUPPORT__
+  #pragma nv_diag_suppress boolean_controlling_expr_is_constant
+  // Disable the "statement is unreachable" message
+  #pragma nv_diag_suppress code_is_unreachable
+  // Disable the "dynamic initialization in unreachable code" message
+  #pragma nv_diag_suppress initialization_not_reachable
+  // Disable the "invalid error number" message that we get with older versions of nvcc
+  #pragma nv_diag_suppress 1222
+  // Disable the "calling a __host__ function from a __host__ __device__ function is not allowed" messages (yes, there are many of them and they seem to change with every version of the compiler)
+  #pragma nv_diag_suppress 2527
+  #pragma nv_diag_suppress 2529
+  #pragma nv_diag_suppress 2651
+  #pragma nv_diag_suppress 2653
+  #pragma nv_diag_suppress 2668
+  #pragma nv_diag_suppress 2669
+  #pragma nv_diag_suppress 2670
+  #pragma nv_diag_suppress 2671
+  #pragma nv_diag_suppress 2735
+  #pragma nv_diag_suppress 2737
+  #pragma nv_diag_suppress 2739
+  #pragma nv_diag_suppress 2885
+  #pragma nv_diag_suppress 2888
+  #pragma nv_diag_suppress 2976
+  #pragma nv_diag_suppress 2979
+  #pragma nv_diag_suppress 20011
+  #pragma nv_diag_suppress 20014
+  // Disable the "// __device__ annotation is ignored on a function(...) that is
+  //              explicitly defaulted on its first declaration" message.
+  // The __device__ annotation seems to actually be needed in some cases,
+  // otherwise resulting in kernel runtime errors.
+  #pragma nv_diag_suppress 2886
+  #pragma nv_diag_suppress 2977
+  #pragma nv_diag_suppress 20012
+#else
   #pragma diag_suppress boolean_controlling_expr_is_constant
   // Disable the "statement is unreachable" message
   #pragma diag_suppress code_is_unreachable
@@ -107,6 +141,7 @@
   #pragma diag_suppress 2886
   #pragma diag_suppress 2977
   #pragma diag_suppress 20012
+#endif
 #endif
 
 #else
